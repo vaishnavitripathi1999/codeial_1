@@ -16,6 +16,11 @@ const expresslayouts = require('express-ejs-layouts');
 //developing a middle ware for using layouts
 app.use(expresslayouts);
 
+//to extract the style and script  from the sub pages to layouts
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
+
+
 //creating a middle ware for using assts folder 
 app.use(express.static('./assets'));
 
