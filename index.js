@@ -9,6 +9,14 @@ const app =express();
 const port = 8000;
 
 
+//requiring the layouts 
+const expresslayouts = require('express-ejs-layouts');
+
+
+//developing a middle ware 
+app.use(expresslayouts);
+
+
 //telling the app to go to the router's index
 //this is a middle ware 
 app.use('/',require('./routes/index'));
