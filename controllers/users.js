@@ -32,3 +32,16 @@ module.exports.profile=function(req,res){
 
 };
 
+
+
+//creating a  user
+module.exports.create=function(req,res){
+
+    //todo later
+}
+
+
+module.exports.createSssion= function(req,res){
+    //todo later
+}
+
