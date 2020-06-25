@@ -13,7 +13,13 @@ const port = 8000;
 //this is a middle ware 
 app.use('/',require('./routes/index'));
 
-// app.set('views','./views');
+
+//set up the view engine
+app.set('view engine','ejs');
+app.set('views','./views');
+
+
+
 
 //telling app to listen to port umber 8000
 app.listen(port,function(err){
