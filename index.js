@@ -13,8 +13,13 @@ const port = 8000;
 const expresslayouts = require('express-ejs-layouts');
 
 
-//developing a middle ware 
+//developing a middle ware for using layouts
 app.use(expresslayouts);
+
+//creating a middle ware for using assts folder 
+app.use(express.static('./assets'));
+
+
 
 
 //telling the app to go to the router's index
