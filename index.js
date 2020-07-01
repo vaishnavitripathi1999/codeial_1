@@ -5,6 +5,9 @@ const express= require('express');
 //getting all the funciton in express
 const app =express();
 
+//requiring the cookie parser
+const cookieParser = require('cookie-parser');
+
 //telling the port 
 const port = 8000;
 
@@ -12,8 +15,16 @@ const port = 8000;
 //getting the db file
 const db = require('./config/mongoose');
 
+
+
 //requiring the layouts 
 const expresslayouts = require('express-ejs-layouts');
+const { urlencoded } = require('express');
+
+
+app.use(express.urlencoded());
+app.use(cookieParser());
+
 
 
 //developing a middle ware for using layouts
