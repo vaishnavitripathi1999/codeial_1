@@ -120,15 +120,15 @@ module.exports.profile= function(req,res){
 
 
 
-module.exports.signout=function(req,res){    
-    req.session.destroy(function(err){  
-        if(err){  
-            console.log(err);  
-        }  
-        else  
-        {  
-            res.redirect('/user/signin');  
-        }  
-    })  
+// module.exports.signout=function(req,res){    
+//     req.session.destroy(function(err){  
+//         if(err){  
+//             console.log(err);  
+//         }  
+//         else  
+//         {  
+//             res.redirect('/user/signin');  
+//         }  
+//     })  
 
-};
+// };
