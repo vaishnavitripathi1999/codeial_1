@@ -94,5 +94,41 @@ module.exports.createSession= function(req,res){
     //handel user not found
 
 
+};
+
+
+module.exports.profile= function(req,res){
+
+ if (req.cookies.user_id){
+    User.findById(req.cookies.user_id,function(err,user){
+        // if(err){ return console.log('There is an error finging the cookie withb email')}
+        if(user){ return res.render('user',{
+                title: 'User Profile',
+                user:user
+        })}
+        return res.redirect('/user/signin');
+
+    })
+    
+ }
+
+ else{
+     return res.redirect('back');
+ }
+
 }
 
+
+
+module.exports.signout=function(req,res){    
+    req.session.destroy(function(err){  
+        if(err){  
+            console.log(err);  
+        }  
+        else  
+        {  
+            res.redirect('/user/signin');  
+        }  
+    })  
+
+};
