@@ -9,7 +9,7 @@ module.exports.home=function(req,res){
     //to render ejs file 
 
     console.log(req.cookies);
-    res.cookie('user_1',gandu);
+    res.cookie('user_1',25);
 
 
 

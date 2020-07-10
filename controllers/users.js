@@ -1,4 +1,4 @@
-
+const User= require('../models/user');
 
 module.exports.profile=function(req,res){
 
@@ -37,8 +37,28 @@ module.exports.profile=function(req,res){
 //creating a  user
 module.exports.create=function(req,res){
 
-    //todo later
+    if(req.body.password!=req.body.confirm_pass){
+        return res.redirect('back');
+    }
+     User.findOne({email:req.body.email},function(err,user){
+         if(err){console.log('there is an error in fingong the user'); return;}
+
+         if(!user){
+             User.create(req.body,function(err,user){
+
+                if(err){console.log('There is an error in creating the user'); return }
+
+                return res.redirect('/user/signin');
+
+             })
+         }
+         else{
+            return res.redirect('back');
+         }
+     })
+            
 }
+
 
 
 module.exports.createSssion= function(req,res){
