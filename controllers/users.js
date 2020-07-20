@@ -61,7 +61,8 @@ module.exports.create=function(req,res){
 
 
 
-module.exports.createSssion= function(req,res){
-    //todo later
+module.exports.createSession= function(req,res){
+return res.redirect('/');
+
 }
 

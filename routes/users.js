@@ -4,6 +4,8 @@
 const express = require('express');
 const router =  express.Router();
 
+const passport= require('passport');
+
 const usercontroller= require('../controllers/users')
 
 
@@ -15,6 +17,11 @@ router.get('/signin',usercontroller.signin);
 
 
 router.post('/create',usercontroller.create);
+
+
+router.post('/create-session',passport.authenticate('local',{
+    failureRedirect:'/user/signin'
+}),usercontroller.createSession);
 
 
 

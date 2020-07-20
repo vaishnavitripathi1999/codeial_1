@@ -15,6 +15,15 @@ const port = 8000;
 //getting the db file
 const db = require('./config/mongoose');
 
+//getting the express session 
+const session = require('express-session');
+
+
+const passport= require('passport');
+
+const passportLocal = require('./config/passport-local');
+
+
 
 
 //requiring the layouts 
@@ -41,14 +50,38 @@ app.use(express.static('./assets'));
 
 
 
-//telling the app to go to the router's index
-//this is a middle ware 
-app.use('/',require('./routes/index'));
 
 
 //set up the view engine
 app.set('view engine','ejs');
 app.set('views','./views');
+
+
+
+app.use(session({
+
+    name:'codiel',
+
+    //todo  change the code late 
+    secret:'blahsomething',
+    saveUninitialized:false,
+    resave:false,
+    cookie:{
+        maxAge:(1000*60*10)
+
+    }
+}))
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
+
+
+//telling the app to go to the router's index
+//this is a middle ware 
+app.use('/',require('./routes/index'));
+
 
 
 
