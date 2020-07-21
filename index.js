@@ -77,6 +77,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+app.use(passport.setAuthenticationuser);
+
+
 
 //telling the app to go to the router's index
 //this is a middle ware 
