@@ -45,9 +45,39 @@ passport.deserializeUser(function(id, done){
             return done(err);
         }
 
-        return done(null, user);
+        return done(null,user);
     });
 });
+
+
+passport.checkAuthentication = function(req,res,next){
+    if(req.isAuthenticated()){
+
+        return next();
+
+    }
+
+    return res.redirect('/user/signin');
+};
+
+passport.setAuthenticationuser= function(res,req,next){
+
+    if(req.isAuthenticated()){
+
+        //req.user has all the informatio of sending the information to the views 
+
+        res.locals.user= req.user;
+
+
+    }
+
+    next();
+
+
+}
+
+
+
 
 
 
