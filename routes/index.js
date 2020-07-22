@@ -1,31 +1,16 @@
+const express = require('express');
 
-//getting the express module 
-const express= require('express');
-
-//importing the homecontroller 
-const homecontroller = require('../controllers/home_controller');
-
-
-
-//calling router of express in a variable called router 
 const router = express.Router();
+const homeController = require('../controllers/home_controller');
+
+console.log('router loaded');
 
 
-//accessing the home from homecontroller
-router.get('/',homecontroller.home);
+router.get('/', homeController.home);
+router.use('/user', require('./users'));
 
-router.use('/user',require('./users'));
-
-//for any other router we can use 
-//router.use('/name',require('./filename'))
+// for any further routes, access from here
+// router.use('/routerName', require('./routerfile));
 
 
-
-
-
-console.log('index from the router is loaded');
-
-
-
-
-module.exports= router;
+module.exports = router;

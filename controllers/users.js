@@ -1,68 +1,68 @@
-const User= require('../models/user');
-
-module.exports.profile=function(req,res){
-
-    // return res.end('<h1>HERE IS YOUR PROFILE</h1>');
-
-    return res.render('user',{
-        title: 'user '
-    });
-    
-    };
+const User = require('../models/user');
 
 
-    
-
-    // remndering the sign up page 
-    module.exports.signup= function(req,res){
-
-        return res.render('signup',{
-            title: 'signup page'
-        });
-   
-   };
+module.exports.profile = function(req, res){
+    return res.render('user', {
+        title: 'User Profile'
+    })
+}
 
 
-   //rendering the sign in page 
-   module.exports.signin= function(req,res){
-
-    return res.render('signin',{
-        title: 'signin page'
-    });
-
-};
+// render the sign up page
+module.exports.signUp = function(req, res){
+    if (req.isAuthenticated()){
+        return res.redirect('/user/profile');
+    }
 
 
+    return res.render('signup', {
+        title: "Codeial | Sign Up"
+    })
+}
 
-//creating a  user
-module.exports.create=function(req,res){
 
-    if(req.body.password!=req.body.confirm_pass){
+// render the sign in page
+module.exports.signIn = function(req, res){
+
+    if (req.isAuthenticated()){
+        return res.redirect('/user/profile');
+    }
+    return res.render('signin', {
+        title: "Codeial | Sign In"
+    })
+}
+
+// get the sign up data
+module.exports.create = function(req, res){
+    if (req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }
-     User.findOne({email:req.body.email},function(err,user){
-         if(err){console.log('there is an error in fingong the user'); return;}
 
-         if(!user){
-             User.create(req.body,function(err,user){
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){console.log('error in finding user in signing up'); return}
 
-                if(err){console.log('There is an error in creating the user'); return }
+        if (!user){
+            User.create(req.body, function(err, user){
+                if(err){console.log('error in creating user while signing up'); return}
 
-                return res.redirect('/user/signin');
-
-             })
-         }
-         else{
+                return res.redirect('/users/sign-in');
+            })
+        }else{
             return res.redirect('back');
-         }
-     })
-            
+        }
+
+    });
 }
 
 
 
-module.exports.createSession= function(req,res){
-return res.redirect('/');
-
+// sign in and create a session for the user
+module.exports.createSession = function(req, res){
+    return res.redirect('/');
 }
 
+module.exports.destroySession = function(req, res){
+    req.logout();
+
+    return res.redirect('/');
+}

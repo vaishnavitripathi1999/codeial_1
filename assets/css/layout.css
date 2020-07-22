@@ -5,3 +5,8 @@ body{
     text-align: center;
     
 }
+
+#auth-links ul li{
+
+    text-decoration: none;
+}

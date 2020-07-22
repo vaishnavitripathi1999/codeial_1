@@ -45,39 +45,30 @@ passport.deserializeUser(function(id, done){
             return done(err);
         }
 
-        return done(null,user);
+        return done(null, user);
     });
 });
 
 
-passport.checkAuthentication = function(req,res,next){
-    if(req.isAuthenticated()){
-
+// check if the user is authenticated
+passport.checkAuthentication = function(req, res, next){
+    // if the user is signed in, then pass on the request to the next function(controller's action)
+    if (req.isAuthenticated()){
         return next();
-
     }
 
-    return res.redirect('/user/signin');
-};
+    // if the user is not signed in
+    return res.redirect('/user/sign-in');
+}
 
-passport.setAuthenticationuser= function(res,req,next){
-
-    if(req.isAuthenticated()){
-
-        //req.user has all the informatio of sending the information to the views 
-
-        res.locals.user= req.user;
-
-
+passport.setAuthenticatedUser = function(req, res, next){
+    if (req.isAuthenticated()){
+        // req.user contains the current signed in user from the session cookie and we are just sending this to the locals for the views
+        res.locals.user = req.user;
     }
 
     next();
-
-
 }
-
-
-
 
 
 
