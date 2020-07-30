@@ -11,7 +11,7 @@ module.exports.profile = function(req, res){
 // render the sign up page
 module.exports.signUp = function(req, res){
     if (req.isAuthenticated()){
-        return res.redirect('/user/profile');
+        return res.redirect('/users/profile');
     }
 
 
@@ -25,7 +25,7 @@ module.exports.signUp = function(req, res){
 module.exports.signIn = function(req, res){
 
     if (req.isAuthenticated()){
-        return res.redirect('/user/profile');
+        return res.redirect('/users/profile');
     }
     return res.render('signin', {
         title: "Codeial | Sign In"
@@ -53,7 +53,6 @@ module.exports.create = function(req, res){
 
     });
 }
-
 
 
 // sign in and create a session for the user
