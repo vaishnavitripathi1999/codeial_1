@@ -1,4 +1,5 @@
-const Post = require('../models/posts')
+const Post = require('../models/posts');
+const Comments=require('../models/comments');
 
 module.exports.create = function(req, res){
     Post.create({
@@ -11,3 +12,19 @@ module.exports.create = function(req, res){
     });
 }
 //are you there ? wait okay open robo3T ok 
+
+module.exports.destroy = function(req, res){
+    Post.findById(req.params.id, function(err, post){
+        // .id means converting the object id into string
+        if (post.user == req.user.id){
+            post.remove();
+
+            Comments.deleteMany({post: req.params.id}, function(err){
+                return res.redirect('back');
+            });
+        }else{
+            return res.redirect('back');
+        }
+
+    });
+}
