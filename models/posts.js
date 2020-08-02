@@ -25,6 +25,8 @@ module.exports = Post;
 
 
 
+//ek ek karke doubts vbatao...
+//okay starting toh phele params kyun use hote hai ?
 
 
 
