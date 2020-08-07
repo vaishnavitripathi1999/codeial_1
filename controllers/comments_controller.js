@@ -15,8 +15,13 @@ module.exports.create = function(req, res){
                 post.comments.push(comment);
                 post.save();
 
+                req.flash('success','comment is  created');
                 res.redirect('/');
             });
+        }
+        else{
+            req.flash('error','comment is not created');
+            return res.redirect('back');
         }
 
     });
@@ -32,9 +37,11 @@ module.exports.destroy = function(req, res){
             comment.remove();
 
             Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}}, function(err, post){
+                req.flash('success','comment is  deleted');
                 return res.redirect('back');
             })
         }else{
+            req.flash('error','comment is not deleted');
             return res.redirect('back');
         }
     });

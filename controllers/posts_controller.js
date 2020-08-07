@@ -1,5 +1,5 @@
 const Post = require('../models/posts');
-const Comments=require('../models/comments');
+const Comment=require('../models/comments');
 
 // module.exports.create = function(req, res){
 //     Post.create({
@@ -89,7 +89,8 @@ const Comments=require('../models/comments');
                 content: req.body.content,
                 user: req.user._id
             });
-        
+
+        req.flash('success','Post is created');
             return res.redirect('back');
     
         }catch(err){
@@ -109,8 +110,10 @@ const Comments=require('../models/comments');
                 post.remove();
     
                 await Comment.deleteMany({post: req.params.id});
+                req.flash('success','Post is deleted');
                 return res.redirect('back');
             }else{
+                req.flash('error','Post is not deleted');
                 return res.redirect('back');
             }
     
