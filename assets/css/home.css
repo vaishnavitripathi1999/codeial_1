@@ -1,9 +1,12 @@
 #home_container {
-  display: flex; }
+  display: flex;
+  justify-content: space-evenly; }
   #home_container #feed-posts {
-    width: 70%;
+    float: left;
+    width: 60%;
     padding: 10px; }
-  #home_container #User_Friends {
+  #home_container #user_friends {
+    float: right;
     width: 30%;
     padding: 10px;
     border-left: 1px solid lightgray;

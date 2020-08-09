@@ -1,14 +1,17 @@
 #home_container{
 
     display: flex;
+    justify-content: space-evenly;
 
     #feed-posts{
-
-        width: 70%;
+        float: left;
+        width: 60%;
         padding: 10px;
+       
     }
 
-    #User_Friends{
+    #user_friends{
+        float: right;
         width: 30%;
         padding: 10px;
         border-left: 1px solid lightgray;
