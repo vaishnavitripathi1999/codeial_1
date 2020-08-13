@@ -7,16 +7,15 @@ const db = require('./config/mongoose');
 // used for session cookie
 const session = require('express-session');
 const passport = require('passport');
-const passportLocal = require('./config/passport-local');
-const MongoStore = require('connect-mongo')(session);
-const sassMiddleware =require('node-sass-middleware');
-const flash =require('connect-flash');
-const customflash=require('./config/middleware');
-const multer  = require('multer');
-const passportGoogle=require("./config/passport-google-oauth");
+const passportLocal = require('./config/passport-local-strategy');
+// const passportJWT = require('./config/passport-jwt-strategy');
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
-//you there ?yes waoit
-//const upload = multer({ dest: 'uploads/' }) save this file this was wrong
+const MongoStore = require('connect-mongo')(session);
+const sassMiddleware = require('node-sass-middleware');
+const flash = require('connect-flash');
+const customMware = require('./config/middleware');
+
 
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -29,17 +28,14 @@ app.use(express.urlencoded());
 
 app.use(cookieParser());
 
-app.use(express.static('./assets')); 
+app.use(express.static('./assets'));
+// make the uploads path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
 
-app.use('/uploads', express.static(__dirname + '/uploads')); 
-//this was missingokaay actually can you also tell me the path  i dont know how to write thse
-// this is simple just write (__direname and follow like normamal path)what is this thing dodingthis is telling main root file that where is our uploads folder in okoaur directoryokayy thank you :) your name is aditya ?yes i amm yher freidn vaihsnavi doing the course , mine is over , so im using his account okay ur doubt just got closed from my window can u plz resolve  siutr from ur side sure wit  dont exit the  done okay than uu you too , can i get your mail , so that i can ask more doubts sure sihmarradha@gmail.com tata ok
 app.use(expressLayouts);
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
-
-
 
 
 
@@ -75,13 +71,11 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
-
 app.use(flash());
-app.use(customflash.setFlash);
+app.use(customMware.setFlash);
 
 // use express router
 app.use('/', require('./routes'));
-
 
 
 app.listen(port, function(err){
